@@ -24,7 +24,7 @@ necessary_dev = devices[1]
 
 template = re.sub('{DEV}', necessary_dev, template)
 
-file = os.environ['HOME'] + '/.evrouterrc'
+file = os.path.join(os.environ['HOME'], '.evrouterrc')
 
 fd = open(file, 'w')
 fd.write(template)
@@ -40,4 +40,4 @@ if os.path.isfile(pidfile):
 
     os.kill(int(evrouter_pid), signal.SIGKILL)
 
-os.system("evrouter {}".format(necessary_dev))
+Popen(["/usr/bin/evrouter", necessary_dev], stdout=PIPE)
